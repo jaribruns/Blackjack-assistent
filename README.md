@@ -147,6 +147,26 @@ losse `.exe` draait zonder Python-installatie).
 Dit lost het tcl/tk-probleem definitief op, omdat de build niet meer
 afhankelijk is van jouw lokale Python-installatie.
 
+## Wat is er verbeterd na feedback
+
+- **Regio's altijd opnieuw tekenen bij opstarten.** Schermresolutie en
+  vensterindeling verschillen per pc, dus `main.py` vraagt standaard bij élke
+  start opnieuw om de vakken in te tekenen. Wil je de laatst opgeslagen
+  vakken hergebruiken (bv. als je zeker weet dat er niets veranderd is),
+  start dan met `--reuse-regions`.
+- **Rode randen op het scherm.** Zodra de vakken getekend zijn, blijven er
+  dunne rode kaders op je scherm staan die precies aangeven waar de tool
+  kijkt - zo kan je in één oogopslag checken of het vak nog goed staat. Ze
+  zijn "click-through": je kan er gewoon doorheen klikken op de site
+  eronder.
+- **Groter en duidelijker overlay.** Grotere letters, meer ruimte, een
+  duidelijkere sluitknop.
+- **"Nieuw schoen"-knop gerepareerd + deck-aantal instelbaar.** De knop
+  gaf voorheen geen enkele zichtbare bevestiging, waardoor het leek alsof
+  er niets gebeurde. Nu opent een klein venstertje dat vraagt hoeveel
+  decks er in het (nieuwe) schoen zitten, en na bevestigen zie je een
+  groene melding "✓ Schoen gereset naar X decks" in het overlay.
+
 ## Installatie (Windows) — handmatige/gedetailleerde route
 
 1. Installeer [Python 3.10+](https://www.python.org/downloads/) (vink
@@ -174,7 +194,7 @@ ontbrekende kaarten aan te vullen; bestaande templates blijven bewaard.
 ### Stap 2 — Regio's instellen en starten
 
 ```powershell
-python src\main.py --setup --decks 6
+python src\main.py --decks 6
 ```
 
 Teken het vak om jouw kaarten, daarna om de dealerkaart(en). Kies ze ruim
@@ -186,9 +206,12 @@ python src\main.py
 
 ### Bij schudden
 
-Klik op **"Nieuw schoen (geschud)"** in het overlay. Dat zet het geheugen
-terug naar een vol schoen. Dit is belangrijk: zonder die reset rekent de tool
-verder met een schoenstand die niet meer klopt.
+Klik op **"🔄 Nieuw schoen (geschud)"** in het overlay. Er verschijnt een
+venstertje dat vraagt hoeveel decks er in het (nieuwe) schoen zitten - vul
+dit in en bevestig. Het geheugen gaat dan terug naar een vol schoen met dat
+aantal decks, en je ziet een groene bevestiging in het overlay. Dit is
+belangrijk: zonder die reset rekent de tool verder met een schoenstand die
+niet meer klopt.
 
 ## Instellingen (`config.json`)
 
@@ -229,6 +252,7 @@ bj-assistant/
     ├── card_matcher.py     kaart identificeren
     ├── calibrate.py        kalibratietool
     ├── calibrate_overlay.py voortgangsvenster tijdens kalibreren
+    ├── region_marker.py    rode randen die de ingetekende vakken tonen
     ├── shoe.py             EXACTE schoen-samenstelling + geheugen
     ├── exact_engine.py     exacte kansberekening (kansboom)
     ├── engine_worker.py    achtergrondthread + cache

@@ -68,8 +68,8 @@ if errorlevel 1 (
 echo.
 echo Wat wil je doen?
 echo   1 = Kaarten kalibreren ^(eerste keer op een nieuwe site^)
-echo   2 = Live tool starten en regio's instellen ^(eerste keer^)
-echo   3 = Live tool starten ^(regio's al ingesteld^)
+echo   2 = Live tool starten ^(tekent elke keer opnieuw de vakken - aanbevolen^)
+echo   3 = Live tool starten ^(hergebruik laatst opgeslagen vakken^)
 echo   4 = Afsluiten
 echo.
 set /p KEUZE="Typ 1, 2, 3 of 4 en druk op Enter: "
@@ -79,11 +79,11 @@ if "%KEUZE%"=="1" (
     goto menu
 )
 if "%KEUZE%"=="2" (
-    python src\main.py --setup --decks 6
+    python src\main.py --decks 6
     goto menu
 )
 if "%KEUZE%"=="3" (
-    python src\main.py
+    python src\main.py --reuse-regions
     goto menu
 )
 if "%KEUZE%"=="4" (
